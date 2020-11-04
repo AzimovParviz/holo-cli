@@ -9,7 +9,9 @@ url="https://schedule.hololive.tv/lives/all"
 response = requests.get(url, headers={'User-Agent':ua.chrome})
 soup = BeautifulSoup(response.text, 'html.parser')
 name = input("input the name of the holo(s) in kana(or hiragana i don't know the difference lmao): ")
-streams = soup.find_all("a", class_="thumbnail")
+streams = soup.find_all("a", class_="thumbnail", style=lambda value: value and 'border: 3px red solid')
+print(streams)
+cmd=''
 for stream in streams:
     print(stream["href"])
     if stream.find(text=re.compile(name)):
@@ -17,4 +19,7 @@ for stream in streams:
         print("link is: "+vid)
         cmd = 'mpv '+vid
         print("cmd is "+cmd)
-subprocess.call(cmd, shell=True)
+if cmd:
+    subprocess.call(cmd, shell=True)
+else:
+    print("No live events found")
