@@ -3,20 +3,21 @@ from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
 import requests
 import re
+import romkan
 
 ua = UserAgent(verify_ssl=False)
 url="https://schedule.hololive.tv/lives/all"
 response = requests.get(url, headers={'User-Agent':ua.chrome})
 soup = BeautifulSoup(response.text, 'html.parser')
-name = input("input the name of the holo(s) in kana(or hiragana i don't know the difference lmao): ")
 streams = soup.find_all("a", class_="thumbnail", style=lambda value: value and 'border: 3px red solid' in value)
-#lives = streams.find_all("div", class_="name")
 print("currently live: "+str(len(streams)))
+for stream in streams:
+    idol = " ".join(stream.text.split())
+    print(idol + " / romaji: "+romkan.to_roma(idol)[6:])
+name = input("input the name of the holo: ")
 cmd=''
 i = 0
 for stream in streams:
-    print(" ".join(stream.text.split()))
-    i += 1
     if stream.find(text=re.compile(name)):
         vid = stream["href"]
         cmd = 'mpv '+vid
