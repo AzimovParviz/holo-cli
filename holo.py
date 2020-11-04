@@ -15,7 +15,7 @@ print("currently live: "+str(len(streams)))
 cmd=''
 i = 0
 for stream in streams:
-    print(stream.text.strip())
+    print(" ".join(stream.text.split()))
     i += 1
     if stream.find(text=re.compile(name)):
         vid = stream["href"]
@@ -24,4 +24,4 @@ if cmd:
     print("cmd is "+cmd)
     subprocess.call(cmd, shell=True)
 else:
-    print("No live events found")
+    print("No live events found for you idol")
