@@ -10,10 +10,8 @@ response = requests.get(url, headers={'User-Agent':ua.chrome})
 soup = BeautifulSoup(response.text, 'html.parser')
 name = input("input the name of the holo(s) in kana(or hiragana i don't know the difference lmao): ")
 streams = soup.find_all("a", class_="thumbnail", style=lambda value: value and 'border: 3px red solid')
-print(streams)
 cmd=''
 for stream in streams:
-    print(stream["href"])
     if stream.find(text=re.compile(name)):
         vid = stream["href"]
         print("link is: "+vid)
