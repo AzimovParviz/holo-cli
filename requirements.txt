@@ -5,5 +5,6 @@ chardet==3.0.4
 fake-useragent==0.1.11
 idna==2.8
 requests==2.22.0
+romkan==0.2.1
 soupsieve==1.9.3
 urllib3==1.25.3
