@@ -24,6 +24,6 @@ for stream in streams:
         cmd = 'mpv '+vid
         print("cmd is "+cmd)
         subprocess.call(cmd, shell=True)
-    else:
-        print("No live events found for you idol")
-        break
+        if not cmd:             
+            print("No live events found for you idol")
+            break
