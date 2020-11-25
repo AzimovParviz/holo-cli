@@ -22,8 +22,8 @@ for stream in streams:
     if stream.find(text=re.compile(name)):
         vid = stream["href"]
         cmd = 'mpv '+vid
-if cmd:
-    print("cmd is "+cmd)
-    subprocess.call(cmd, shell=True)
-else:
-    print("No live events found for you idol")
+        print("cmd is "+cmd)
+        subprocess.call(cmd, shell=True)
+    else:
+        print("No live events found for you idol")
+        break
