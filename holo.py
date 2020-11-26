@@ -16,14 +16,12 @@ for stream in streams:
     idol = " ".join(stream.text.split())
     i += 1
     print(str(i)+'. '+idol + " / romaji: "+romkan.to_roma(idol)[6:])
-name = input("input the name of the holo: ")
 cmd=''
-for stream in streams:
-    if stream.find(text=re.compile(name)):
-        vid = stream["href"]
-        cmd = 'mpv '+vid
-        print("cmd is "+cmd)
-        subprocess.call(cmd, shell=True)
-        if not cmd:             
-            print("No live events found for you idol")
-            break
+while(True):
+    name = input("input the name of the holo: ")
+    for stream in streams:
+        if stream.find(text=re.compile(name)):
+            vid = stream["href"]
+            cmd = 'mpv '+vid
+            print("cmd is "+cmd)
+            subprocess.Popen(cmd, shell=True)
