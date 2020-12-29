@@ -12,7 +12,7 @@ member_list = {
     "Mel" : "夜空メル",
     "Fubuki" : "白上フブキ",
     "Matsuri" : "夏色まつり",
-    "Aki" : "アキ・ローゼンタール",
+    "Aki" : "アキロゼ",
     "Haachama" : "赤井はあと",
     "Aqua" : "湊あくあ",
     "Shion" : "紫咲シオン",
