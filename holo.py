@@ -38,7 +38,17 @@ member_list = {
     "Nene" : "桃鈴ねね",
     "Botan" : "獅白ぼたん",
     "Aloe" : "魔乃アロエ",
-    "Polka" : "尾丸ポルカ"
+    "Polka" : "尾丸ポルカ",
+    "Miyabi" : "花咲みやび",
+    "Izuru" : "奏手イヅル",
+    "Arurandeisu" : "アルランディス",
+    "Rikka" : "律可",
+    "Astel" : "アステル・レダ",
+    "Temma" : "岸堂天真",
+    "Roberu" : "夕刻ロベル",
+    "Kaoru" : "月下カオル",
+    "Shien" : "影山シエン",
+    "Oga" : "荒咬オウガ"
     }
 
 def list_streams(streams):
