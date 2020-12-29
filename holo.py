@@ -3,8 +3,6 @@ from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
 import requests
 import re
-import romkan
-
 
 member_list = {
     "Sora" : "ときのそら",
@@ -57,7 +55,11 @@ def list_streams(streams):
     for stream in streams:
         idol = " ".join(stream.text.split())
         i += 1
-        print(str(i)+'. '+idol + " / romaji: "+romkan.to_roma(idol)[6:])
+        for key, name in member_list.items():
+            if name in idol:
+                idol_en = key
+        print(str(i)+'. '+idol + " / romaji: "+ idol_en)
+
 
 ua = UserAgent(verify_ssl=False)
 url="https://schedule.hololive.tv/lives/all"
