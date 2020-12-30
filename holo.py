@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import subprocess
 from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
@@ -13,7 +14,7 @@ member_list = {
     "Fubuki" : "白上フブキ",
     "Matsuri" : "夏色まつり",
     "Aki" : "アキロゼ",
-    "Haachama" : "赤井はあと",
+    "Haato" : "赤井はあと",
     "Aqua" : "湊あくあ",
     "Shion" : "紫咲シオン",
     "Ayame" : "百鬼あやめ",
