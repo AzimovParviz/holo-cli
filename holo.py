@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import subprocess
 from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
@@ -54,10 +55,11 @@ def list_streams(streams):
     i = 0
     for stream in streams:
         idol = " ".join(stream.text.split())
+        idol_en = idol[6:]
         i += 1
         for key, name in member_list.items():
             if name in idol:
-                idol_en = key
+                idol_en = key            
         print(str(i)+'. '+idol + " / romaji: "+ idol_en)
 
 
