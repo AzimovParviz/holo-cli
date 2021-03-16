@@ -40,7 +40,7 @@ member_list = {
     "Polka" : "尾丸ポルカ",
     "Miyabi" : "花咲みやび",
     "Izuru" : "奏手イヅル",
-    "Arurandeisu" : "アルランディス",
+    "Aruran" : "アルランディス",
     "Rikka" : "律可",
     "Astel" : "アステル・レダ",
     "Temma" : "岸堂天真",
@@ -65,18 +65,32 @@ def list_streams(streams):
 
 ua = UserAgent(verify_ssl=False)
 url="https://schedule.hololive.tv/lives/all"
-cmd=''
 while(True):
+    cmd=''
     response = requests.get(url, headers={'User-Agent':ua.chrome})
     soup = BeautifulSoup(response.text, 'html.parser')
     streams = soup.find_all("a", class_="thumbnail", style=lambda value: value and 'border: 3px red solid' in value)
     list_streams(streams)
-    name = input("input the name of the holo: ")
-    if name in member_list:
-        name = member_list[name]
-    for stream in streams:
-        if stream.find(text=re.compile(name)):
-            vid = stream["href"]
-            cmd = 'mpv '+vid
-            print("cmd is "+cmd)
-            subprocess.call(cmd, shell=True)
+    name = input("input the name of the holo(s) separated by space: ")
+    if " " in name:
+        name = name.split(" ")
+        for item in name:
+            print(item)
+        for stream in streams:
+            for item in name:
+                if item in member_list:
+                    item = member_list[item]
+                if stream.find(text=re.compile(item)):
+                    vid = stream["href"]
+                    cmd += 'mpv '+vid+' & '
+                    print("cmd is "+cmd)               
+                                            
+    else:
+        if name in member_list:
+            name = member_list[name]
+        for stream in streams:
+            if stream.find(text=re.compile(name)):
+                vid = stream["href"]
+                cmd += 'mpv '+vid
+                print("cmd is "+cmd)                        
+    subprocess.call(cmd, shell=True)
