@@ -6,6 +6,7 @@ import requests
 import re
 import sys, getopt
 import datetime
+import os
 
 member_list = {
     "Sora" : "ときのそら",
@@ -109,7 +110,7 @@ def main(argv):
                         item = member_list[item]
                     if stream.find(text=re.compile(item)):
                         vid = stream["href"]
-                        cmd += 'mpv '+vid+' & '
+                        cmd += 'mpv --really-quiet '+vid+' & '
 
         else:#when only a single name is passed
             if name in member_list:
@@ -117,9 +118,10 @@ def main(argv):
             for stream in streams:
                 if stream.find(text=re.compile(name)):
                     vid = stream["href"]
-                    cmd += 'mpv '+vid
-        print("cmd is "+cmd)
+                    cmd += 'mpv --really-quiet '+vid
         subprocess.call(cmd, shell=True)#executing the final command containing either one or several streams
-        
+        os.system('stty sane')#sometimes the inputted name(s) do not show up in the terminal
+        #(may be related to system slowing down after having too many instances of mpv open
+        #requires more testing
 if __name__ == "__main__":
    main(sys.argv[1:])
