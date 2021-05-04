@@ -50,7 +50,18 @@ member_list = {
     "Roberu" : "夕刻ロベル",
     "Kaoru" : "月下カオル",
     "Shien" : "影山シエン",
-    "Oga" : "荒咬オウガ"
+    "Oga" : "荒咬オウガ",
+    "Kiara" : "Kiara",
+    "Amelia" : "Amelia",
+    "Gura" : "Gura",
+    "Calli" : "Calli",
+    "Ina" : "Ina",
+    "Moona" : "Moona",
+    "Risu" : "Risu",
+    "Iofi" : "Iofi",
+    "Ollie" : "Ollie",
+    "Reine" : "Reine",
+    "Anya" : "Anya"
     }
 
 def list_streams(streams, sv):
@@ -105,8 +116,8 @@ def main(argv):
     today = datetime.date.today().day
     month = datetime.date.today().month
     is_today = None
-    streams = []
     while(True):#while(True) so the user can repeatedly fetch new information from the schedule website after closing the stream they were watching before
+        streams = []
         cmd=''
         response = requests.get(url, headers={'User-Agent':ua.chrome}, cookies=cookies)#making a request to the schedule website, using chrome headers from fake-useragent and cookies for the timezone
         soup = BeautifulSoup(response.text, 'html.parser')
