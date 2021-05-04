@@ -65,22 +65,24 @@ def list_streams(streams, sv):
     elif sv == 'border: 0':
         print("upcoming streams: ")
     for stream in streams:
-        #idol = " ".join(stream.text.split())
-        idol_en = stream[6:]#removing the time of the broadcast from html elemenet containing the streamer's name
-        idol_time = stream[:5]+':00'#getting the time of the broadcast                
+        idol = " ".join(stream.text.split())
+        idol_en = idol[6:]#removing the time of the broadcast from html elemenet containing the idoler's name
+        idol_time = idol[:5]+':00'#getting the time of the broadcast
+        idol_time = datetime.datetime.strptime(idol_time, "%H:%M:%S")
+        idol_time = idol_time.replace(year=now.year, month=now.month, day=now.day)
         i += 1
         if sv == 'border: 3px red solid':            
             for key, name in member_list.items():
-                if name in stream:
+                if name in idol:
                     idol_en = key
-            print(str(i)+'. '+stream + " / romaji: "+ idol_en)
+                    print(str(i)+'. '+idol + " / romaji: "+ idol_en)
         elif sv == 'border: 0':
             for key, name in member_list.items():
-                if (name in stream) & (idol_time>=str(now)):
-                    print("idol time is "+idol_time)
-                    print("the time now is "+str(now))
+                if (name in idol) & (idol_time>=now):
+                    #print("idol time is "+str(idol_time))
+                    #print("the time now is "+str(now))
                     idol_en = key
-                    print(str(i)+'. '+stream + " / romaji: "+ idol_en)
+                    print(str(i)+'. '+idol + " / romaji: "+ idol_en)
 
 def main(argv):
     search_value = ""#variable that will be used to determine whether live or upcoming livestreams are to be shown
@@ -114,21 +116,15 @@ def main(argv):
                 date = row.find("div", class_="holodule navbar-text")
                 if str(today) in str(date):
                     is_today = True
-                    print(date)
                 else:
                     is_today = None            
             if is_today:
                 col = row.find("div",class_="row")
-                st = col.find_all("a", class_="thumbnail")
+                st = col.find_all("a", class_="thumbnail", style=lambda value: value and search_value in value)
                 if st:
                     for c in st:
                         today_stream = c
-                        if today_stream:
-                            idol = " ".join(today_stream.text.split())
-                            streams += idol
-                            print(idol)
-        # streams = soup.find_all("a", class_="thumbnail", style=lambda value: value and search_value in value)#finding the streams based on the option passed to the program
-        dates = soup.find_all("div", class_="holodule navbar-text")
+                        streams.append(c)
         list_streams(streams, search_value)
         if "red solid" in search_value:
             name = input("input the name of the holo(s) separated by space: ")            
