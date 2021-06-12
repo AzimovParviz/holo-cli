@@ -61,7 +61,8 @@ member_list = {
     "Iofi" : "Iofi",
     "Ollie" : "Ollie",
     "Reine" : "Reine",
-    "Anya" : "Anya"
+    "Anya" : "Anya",
+    "AZKi":"AZKi"
     }
 
 def list_streams(streams, sv):
@@ -71,7 +72,7 @@ def list_streams(streams, sv):
     # print("idol time is: "+idol_time)
     # print("current time is: "+str(now))
     today = datetime.date.today()
-    if sv == 'border: 3px red solid':
+    if sv == 'border: 3px':
         print("currently live: "+str(len(streams)))
     elif sv == 'border: 0':
         print("upcoming streams: ")
@@ -82,7 +83,7 @@ def list_streams(streams, sv):
         idol_time = datetime.datetime.strptime(idol_time, "%H:%M:%S")
         idol_time = idol_time.replace(year=now.year, month=now.month, day=now.day)
         i += 1
-        if sv == 'border: 3px red solid':            
+        if sv == 'border: 3px':            
             for key, name in member_list.items():
                 if name in idol:
                     idol_en = key
@@ -107,7 +108,7 @@ def main(argv):
             print ('-l lists currently live streams\n -u lists upcoming streams')
             sys.exit()
         elif opt in ("-l"):
-            search_value = 'border: 3px red solid'#currently live streams are marked with a red border on the schedule website
+            search_value = 'border: 3px'#currently live streams are marked with a red border on the schedule website
         elif opt in ("-u"):
             search_value = 'border: 0'#property of non live streams on the schedule website
     ua = UserAgent(verify_ssl=False)
@@ -131,13 +132,13 @@ def main(argv):
                     is_today = None            
             if is_today:
                 col = row.find("div",class_="row")
-                st = col.find_all("a", class_="thumbnail", style=lambda value: value and search_value in value)
+                st = col.find_all("a", class_="thumbnail", style=lambda value: search_value in value)
                 if st:
                     for c in st:
                         today_stream = c
                         streams.append(c)
         list_streams(streams, search_value)
-        if "red solid" in search_value:
+        if "3px" in search_value:
             name = input("input the name of the holo(s) separated by space: ")            
             if " " in name:#case of passing several vtubers to open multiple streams
                 name = name.split(" ")
