@@ -62,7 +62,13 @@ member_list = {
     "Ollie" : "Ollie",
     "Reine" : "Reine",
     "Anya" : "Anya",
-    "AZKi":"AZKi"
+    "AZKi":"AZKi",
+    "IryS":"IryS",
+    "Kronii":"Kronii",
+    "Mumei":"Mumei",
+    "Baelz":"Baelz",
+    "Fauna":"Fauna",
+    "Sana":"Sana"
     }
 
 def list_streams(streams, sv):
